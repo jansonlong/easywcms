@@ -1,0 +1,24 @@
+{
+    "name": "easywcms/addons",
+    "description": "This a easywcms addon",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Janson",
+            "email": "admin@zcphp.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "think\\": "src/"
+        },
+        "files": [
+            "src/helper.php"
+        ]
+    }
+}

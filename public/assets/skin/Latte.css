@@ -1,0 +1,66 @@
+/*
+* name : 皮肤样式
+* date : 2019-08-24 13:54:47
+*/
+/*渐变色*/
+.easy-console .layui-header,
+body .easy-layer .layui-layer-title
+{
+	background-image: -webkit-gradient(linear,left top,right top,from(#917046),to(#aa8452));
+	background-image: -webkit-linear-gradient(left,#917046,#aa8452);
+	background-image: -moz-linear-gradient(left,#917046,#aa8452);
+	background-image: linear-gradient(to right,#917046,#aa8452);	
+}
+/*主色*/
+.maincolor,
+button[lay-submit],
+.layui-layer-btn .layui-layer-btn0,
+.layui-laypage .layui-laypage-curr .layui-laypage-em,
+.layui-layer-tips .layui-layer-content,
+.easy-btn-tablereload,
+#LAY-system-side-menu li.layui-this a,
+.easywcms-pagetabs .layui-tab-title li.layui-this,
+.easy-console .layui-logo,
+.laydate-theme-easy .layui-laydate-header,
+.laydate-theme-easy td.layui-this,
+.layui-form-onswitch
+{
+	background-color:#917046 !important;
+}
+/*主色 文字颜色*/ 
+.maincolor-a-hover-t a:hover,
+.layui-tab-brief>.layui-tab-title .layui-this
+{
+	color:#917046 !important;
+}
+/*辅色 文字颜色*/
+.assistcolor-a-hover-t a:hover
+{
+	color:#aa8452 !important;
+}
+
+/*主色 边框 */
+.layui-layer-btn .layui-layer-btn0,
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after,
+.layui-elem-quote,
+.layui-form-onswitch
+{
+	border-color: #917046 !important;	
+}
+.layui-quote-nm{border-color: #e6e6e6!important;}
+/*tips*/
+.layui-layer-tips i.layui-layer-TipsB,
+.layui-layer-tips i.layui-layer-TipsT
+{
+	border-right-color: #917046 !important;	
+}
+/*tips*/
+.layui-layer-tips i.layui-layer-TipsR
+{
+	border-bottom-color: #917046 !important;	
+}
+/*弹窗标题颜色*/
+body .easy-layer .layui-layer-title{ color:#fff; }
+/*左侧菜单*/
+.easy-console .layui-header a, .easy-console .layui-header a cite{ color:#fff!important;}
+.easywcms-pagetabs .layui-tab-title li.layui-this{ color:#fff!important;}
