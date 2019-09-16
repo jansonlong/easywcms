@@ -11,7 +11,7 @@
 namespace app\install\controller;
 
 use think\Controller;
-use easywcms\Easy;
+use think\facade\Cache;
 
 class Index extends Controller
 {
@@ -33,7 +33,6 @@ class Index extends Controller
             $action = 'step'.$this->step;
             return $this->$action();
         }
-		
     }
     
     //安装协议
@@ -43,6 +42,8 @@ class Index extends Controller
         if ( !is_file($sqlFile) ) {
             exception('数据库安装文件不存在：'.$sqlFile, 10006);
         }
+        Cache::clear();
+        Cache::set('install_in',1);
         return $this->fetch('step1');
     }
     

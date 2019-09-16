@@ -9,6 +9,14 @@
         </div>
         <div class="layui-form-mid layui-word-aux">目前仅限mysql</div>
     </div>
+        
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据库端口号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="hostport" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="{$data['hostport']?:'3306'}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">数据库端口号，一般为3306</div>
+    </div>
     
     <div class="layui-form-item">
         <label class="layui-form-label">数据库服务器</label>
@@ -16,14 +24,6 @@
             <input type="text" name="hostname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="{$data['hostname']?:'127.0.0.1'}">
         </div>
         <div class="layui-form-mid layui-word-aux">数据库服务器，数据库服务器IP，一般为127.0.0.1</div>
-    </div>
-    
-    <div class="layui-form-item">
-        <label class="layui-form-label">数据库端口号</label>
-        <div class="layui-input-inline">
-            <input type="text" name="hostport" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="{$data['hostport']?:'3306'}">
-        </div>
-        <div class="layui-form-mid layui-word-aux">数据库端口号，一般为3306</div>
     </div>
     
     <div class="layui-form-item">

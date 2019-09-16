@@ -16,6 +16,7 @@ use think\facade\Config;
 use think\facade\Route;
 use think\facade\Lang;
 use think\facade\Env;
+use think\facade\Cache;
 
 class app_init{
 	
@@ -43,11 +44,10 @@ class app_init{
 		}
         
         //生成路由配置文件
-        if( cache('ConfigRoute') != 1 ){
+        if( Cache::get('ConfigRoute') != 1 ){
             //判断是否已安装
             if( !is_file(Env::get('root_path').'config/database.php') ){
-                if( cache('install_in') != 1 ){
-                    cache('install_in',1);
+                if( Cache::get('install_in') != 1 ){
                     header("Location: ".url('/install'));
                     exit;
                 }else{
@@ -56,7 +56,7 @@ class app_init{
             }
             $route = ConfigRoute::where('status=1')->select()->toArray();
             if(count($route)<=0){
-                cache('ConfigRoute',0);
+                Cache::set('ConfigRoute',0);
                 return true;
             }
             $temp = [];
@@ -111,7 +111,7 @@ class app_init{
             //初始化文件驱动
             $File = new \think\template\driver\File();
             $File->write($path, '<?php '.$code);
-            cache('ConfigRoute',1);
+            Cache::set('ConfigRoute',1);
         }
 		
 	}
