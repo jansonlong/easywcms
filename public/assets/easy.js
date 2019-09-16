@@ -443,7 +443,7 @@ layui.define(layui.load_modular, function(exports){
 								}
 							}
 						}
-                        if(!options.closeFrame){
+                        if( options.closeFrame !==0 ){
                             layer.close( layer.getFrameIndex(window.name) );//关闭当前窗口
                         }
 					}else{
