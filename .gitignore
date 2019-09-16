@@ -2,7 +2,7 @@
 /runtime/
 /addons/cms/
 /addons/test/
-/addons/cn/
+/public/cn/
 /public/en/
 /public/uploads/
 /config/login.php
