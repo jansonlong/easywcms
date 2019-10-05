@@ -26,7 +26,6 @@ class Index extends Controller
         $this->assign(['step'=>$this->step ]);
     }
 	
-    
     public function index()
     {
         if(!empty($this->step)){

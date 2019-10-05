@@ -243,6 +243,12 @@ class Index
      */
     function check_dirfile()
     {
+        //创建uplouds目录
+        $dir = "./uploads";
+        if( !is_dir($dir) ){
+           mkdir(iconv("UTF-8", "GBK", $dir),0777,true); 
+        }
+        //
         $items = array(
             array('dir',  '可写', 'ok', 'addons'),
             array('dir',  '可写', 'ok', 'applic/install'),

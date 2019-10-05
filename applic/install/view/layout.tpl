@@ -74,7 +74,11 @@ easy.define=function(callback){callback?easy.render=function(){callback()}:false
         <label><input type="checkbox" id="tongyi" >　我已详细阅读安装协议并同意安装协议<br><br></label>
         <a id="atongyi" class="{if ($step==1)}block{/if}">开始安装</a>
         <a id="aupper" href="{:url('/Install?step='.($step-1))}" class="{if ($upper)}block{/if}">上一步</a>
-        <a id="anext"  href="{:url('/Install?step='.($step+1))}" class="{if ($next)}block{/if}">下一步</a>
+        {if ($next)}
+        <a id="anext" href="{:url('/Install?step='.($step+1))}" class="block">下一步</a>
+        {else}{if ($step>2&&$step!=6)}
+        <a id="anext" href="javascript:window.location.reload();" class="block">刷新</a>
+        {/if}{/if}
     </div>
 </body>
 <script type="text/javascript" src="{:config('param.assets')}layui/layui.js?t=1565594821"></script>
