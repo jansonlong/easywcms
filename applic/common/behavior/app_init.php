@@ -48,6 +48,7 @@ class app_init{
             //判断是否已安装
             if( !is_file(Env::get('root_path').'config/database.php') ){
                 if( Cache::get('install_in') != 1 ){
+                    Cache::set('install_in',1);
                     header("Location: ".url('/install'));
                     exit;
                 }else{

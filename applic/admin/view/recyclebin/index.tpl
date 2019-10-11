@@ -1,7 +1,7 @@
 <div class="easy-list-main">
 	<form class="layui-form">
 		<div class="easy-toolbar-box" >
-			<a title="刷新列表" class="layui-btn easy-btn-tablereload"><i class="layui-icon">&#xe656;</i></a>
+			<a title="刷新列表" class="layui-btn easy-btn-tablereload"><i class="layui-icon">&#xe669;</i></a>
 			<a title="恢复" data-type="recover" class="multi layui-btn layui-btn-sm"><i class="layui-icon">&#xe663;</i>恢复数据</a>
 			<a title="删除" data-type="harddel" class="multi layui-btn layui-btn-danger layui-btn-sm"><i class="layui-icon">&#xe640;</i>彻底删除</a>
 			<div id="Screenbutton" style="float: left; margin:0 10px; border: 1px solid #d0d2d0; border-radius: 2px;">

@@ -17,8 +17,10 @@ namespace addons\baiduue\controller;
 class Index extends \app\admin\controller\Admin {
 
 	//初始化
-    public function initialize(){
-		parent::initialize();
+    public function initialize()
+    {
+        //权限验证实例->登录验证
+        \easywcms\Auth::getInstance()->login();
     }
 	
 	//入口

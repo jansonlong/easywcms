@@ -10,7 +10,7 @@
 	</ul>
 	<form class="layui-form" style="background-color: #fff; padding: 10px;">
 		<div class="easy-toolbar-box" >
-			<a title="刷新列表" class="layui-btn easy-btn-tablereload"><i class="layui-icon">&#xe656;</i></a>
+			<a title="刷新列表" class="layui-btn easy-btn-tablereload"><i class="layui-icon">&#xe669;</i></a>
 		</div>
 		<div id="table-list-body">
 			<table id="layui-table" lay-filter="layui-table" class="layui-table" style="display: none"></table> 
@@ -39,13 +39,13 @@ var store_url = '{$store_url|raw}';
     <div class="layui-form-item">
         <label class="layui-form-label" >账号</label>
         <div class="layui-input-block" style="max-width: 650px;">
-            <input type="text" class="layui-input"  lay-verType="tips" lay-verify="required" id="name" name="username" placeholder="请输入 Store账号" value="user"  >
+            <input type="text" class="layui-input"  lay-verType="tips" lay-verify="required" id="name" name="username" placeholder="请输入 Store账号">
         </div>
     </div>	
     <div class="layui-form-item">
         <label class="layui-form-label" >密码</label>
         <div class="layui-input-block" style="max-width: 650px;">
-            <input type="text" class="layui-input" lay-verType="tips" lay-verify="required" id="password" name="userpwd" placeholder="请输入 Store密码" onfocus="this.setAttribute('type','password');" value="123456">
+            <input type="text" class="layui-input" lay-verType="tips" lay-verify="required" id="password" name="userpwd" placeholder="请输入 Store密码" onfocus="this.setAttribute('type','password');">
         </div>
     </div>
     <div style=" padding-top: 5px;">还没有Store账号? 点击<a href="//store.zcphp.com/" target="_blank" style="color: #1278f6">去注册</a></div>
