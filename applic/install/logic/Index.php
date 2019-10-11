@@ -243,12 +243,16 @@ class Index
      */
     function check_dirfile()
     {
-        //创建uplouds目录
-        $dir = "./uploads";
-        if( !is_dir($dir) ){
-           mkdir(iconv("UTF-8", "GBK", $dir),0777,true); 
+        try {
+            //创建uplouds目录
+            $dir = "./uploads";
+            if( !is_dir($dir) ){
+               mkdir(iconv("UTF-8", "GBK", $dir),0777,true); 
+            }
+        } catch (\Exception $e) {
+            // 使用助手函数抛出异常
+            throw new \think\Exception('根目录无权限创建 uploads 目录，请修改权限后，刷新重试！', 10006);
         }
-        //
         $items = array(
             array('dir',  '可写', 'ok', 'addons'),
             array('dir',  '可写', 'ok', 'applic/install'),

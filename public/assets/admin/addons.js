@@ -1,4 +1,7 @@
 var top_location = window.top.location;
+var online_install = false;
+var buystorewin = false;
+var loginstorewin = false;
 layui.define(function(exports){
 	
 	"use strict";
@@ -110,79 +113,124 @@ layui.define(function(exports){
                             top_location.reload()
                         }, function(){});
                     });
+                //下载并安装
                 }else if(obj.event === 'online_install'){
-                    easy.ajax({
-                        url:easy.url.index + '?type=online_install',
-                        param: {name:obj.data.name},
-                        loading:{text:'正在下载插件...'},
-                    },function(ret){
-                        if( ret.code==1 ){
-                            open_install(obj.data);
-                        //登录store账号
-                        }else if( ret.code==40000 ){
-                            //创建窗口
-                            var loginstorewin = layer.open({
-                                id:'login-store',
-                                isOutAnim :false,
-                                title:'登录 Store', type: 1, offset:80,shade:0.1,
-                                skin: 'easy-layer',
-                                area: ['480px', '320px'], //宽高
-                                content: $('#login-store-html').html()
-                            });
-                            //监听submit提交
-                            layui.form.on('submit(login-store-form)', function(data){
-                                layer.msg('正在登录...', {icon: 16,shade: 0.15,time:0});
-                                $.ajax({
-                                    url:easy.url.index + '?type=login',
-                                    type: "POST", 
-                                    data: data.field,
-                                    success:function(ret){
-                                        layer.closeAll('dialog');
-                                        if(ret.code == 1){
-                                            layer.close(loginstorewin);
-                                            //验证用户是否有购买记录
-                                            easy.ajax({
-                                                url:easy.url.index + '?type=online_install',
-                                                param: {name:obj.data.name},
-                                                loading:{text:'正在处理...'},
-                                            },function(ret){
-                                                //打开购买界面
-                                                if( ret.code == 40003 ){
-                                                    open_buy(obj.data,ret.content);
-                                                }else if( ret.code == 1 ){
-                                                    open_install(obj.data);
-                                                }else{
-                                                    alert(ret.msg)
-                                                }
-                                            });
-                                        }else{
-                                            easy.error(ret.msg||false);
-                                        }
-                                    },
-                                    error:function(){
-                                        //layer.close(loginstorewin);
-                                    },
-                                    complete:function(){
-                                        layer.closeAll('dialog');
-                                    }
-                                });
-                                return false;
-                            });
-                        }else if( ret.code==40003 ){
-                                 open_buy(obj.data,ret.content);
-                        //弹出提示
-                        }else{
-                           window.top.layer.confirm(ret.msg||'提示', {
-                                skin: 'easy-layer',
-                                offset: 60,
-                                btn: ['好的'] //按钮
-                            }, function(index){
-                                window.top.layer.close(index);
-                            }); 
-                        }
-                    });
+                    online_install(obj);
                 }
             });
+            
+            //删除
+            $('body').on("click",'.my-purchased',function(){
+                var _this = $(this);
+                var obj  = new Object;
+                obj.data = new Object;
+                obj.data.title = _this.attr('data-title');
+                obj.data.name  = _this.attr('data-name');
+                layer.close(buystorewin);
+                //
+                //验证用户是否有购买记录
+                easy.ajax({
+                    url:easy.url.index + '?type=online_install',
+                    param: { name:obj.data.name},
+                    loading:{text:'正在验证，请稍候...'},
+                },function(ret){
+                    //重新登录
+                    if( ret.code==40000 ){
+                        easy.error('请重新登录');
+                        online_install(obj);
+                    //打开购买界面
+                    }else if( ret.code == 40003 ){
+                        layer.confirm(ret.msg||'提示', {
+                            anim: -1,isOutAnim :false,
+                            skin: 'easy-layer',
+                            offset: 60,
+                            btn: ['好的'] //按钮
+                        }, function(index){
+                            layer.close(index);
+                            open_buy(obj.data,ret.content);
+                        });
+                    }else if( ret.code == 1 ){
+                        open_install(obj.data);
+                    }else{
+                        alert(ret.msg)
+                    }
+                });
+            });
+            
+            //下载并安装
+            online_install = function (obj){
+                easy.ajax({
+                    url:easy.url.index + '?type=online_install',
+                    param: {name:obj.data.name},
+                    loading:{text:'正在下载插件...'},
+                },function(ret){
+                    if( ret.code==1 ){
+                        open_install(obj.data);
+                    //登录store账号
+                    }else if( ret.code==40000 ){
+                        //创建窗口
+                        loginstorewin = layer.open({
+                            id:'login-store',
+                            isOutAnim :false,
+                            title:'登录 Store', type: 1, offset:80,shade:0.1,
+                            skin: 'easy-layer',
+                            area: ['480px', '320px'], //宽高
+                            content: $('#login-store-html').html()
+                        });
+                        //监听submit提交
+                        layui.form.on('submit(login-store-form)', function(data){
+                            layer.msg('正在登录...', {icon: 16,shade: 0.15,time:0});
+                            $.ajax({
+                                url:easy.url.index + '?type=login',
+                                type: "POST", 
+                                data: data.field,
+                                success:function(ret){
+                                    layer.closeAll('dialog');
+                                    if(ret.code == 1){
+                                        layer.close(loginstorewin);
+                                        //验证用户是否有购买记录
+                                        easy.ajax({
+                                            url:easy.url.index + '?type=online_install',
+                                            param: {name:obj.data.name},
+                                            loading:{text:'正在处理...'},
+                                        },function(ret){
+                                            //打开购买界面
+                                            if( ret.code == 40003 ){
+                                                open_buy(obj.data,ret.content);
+                                            }else if( ret.code == 1 ){
+                                                open_install(obj.data);
+                                            }else{
+                                                alert(ret.msg)
+                                            }
+                                        });
+                                    }else{
+                                        easy.error(ret.msg||false);
+                                    }
+                                },
+                                error:function(){
+                                    layer.close(loginstorewin);
+                                },
+                                complete:function(){
+                                    layer.closeAll('dialog');
+                                }
+                            });
+                            return false;
+                        });
+                    }else if( ret.code==40003 ){
+                             open_buy(obj.data,ret.content);
+                    //弹出提示
+                    }else{
+                       window.top.layer.confirm(ret.msg||'提示', {
+                            anim: -1,isOutAnim :false,
+                            skin: 'easy-layer',
+                            offset: 60,
+                            btn: ['好的'] //按钮
+                        }, function(index){
+                            window.top.layer.close(index);
+                        }); 
+                    }
+                });
+            }
             
             //创建安装插件窗口
             function open_install(obj){
@@ -198,8 +246,9 @@ layui.define(function(exports){
             
             //创建窗口
             function open_buy(obj,content){
-                var buystorewin = layer.open({
+                buystorewin = layer.open({
                     id:'buy-store',
+                    anim: -1,isOutAnim :false,
                     isOutAnim :false,
                     title:'购买插件', type: 1, offset:80,shade:0.1,
                     skin: 'easy-layer',
@@ -220,6 +269,7 @@ layui.define(function(exports){
                                 open_install(obj);
                             }else{
                                 window.top.layer.confirm(ret.msg||'提示', {
+                                    anim: -1,isOutAnim :false,
                                     skin: 'easy-layer',
                                     offset: 60,
                                     btn: ['好的'] //按钮
@@ -247,6 +297,7 @@ layui.define(function(exports){
                     var layer = window.top.layer;
                     //弹出提示
                     layer.confirm(res.msg||'提示', {
+                        anim: -1,isOutAnim :false,
                         skin: 'easy-layer',
                         offset: 60,
                         btn: ['刷新','稍后手动刷新'] //按钮
