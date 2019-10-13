@@ -15,6 +15,8 @@
         }
         if( isset($_GET['menutype']) && (int)$_GET['menutype'] === 0 && !isset($vo['menutype']) ){
             $vo['menutype'] = $_GET['menutype'];
+        }else if( !isset($_GET['menutype']) && !isset($vo['menutype']) ){
+            $vo['menutype'] = '-1';
         }
     ?>
         
